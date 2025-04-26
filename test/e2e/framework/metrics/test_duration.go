@@ -43,6 +43,10 @@ func (r *TestDurationRecorder) RecordTestEnd(testName string, startTime time.Tim
 
 // WriteReport writes a report of test durations and slow tag recommendations
 func (r *TestDurationRecorder) WriteReport() error {
+	if r.outputDir == "" {
+		return fmt.Errorf("output directory not set")
+	}
+
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
